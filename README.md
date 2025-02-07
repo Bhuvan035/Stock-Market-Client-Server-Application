@@ -1,4 +1,3 @@
-
 # Stock Market Client-Server Application
 
 This project implements a networked client-server application where the client can query a server to fetch stock market information for two major stocks: **TESLA (TSLA)** and **Microsoft (MSFT)**. The server processes commands related to stock prices and provides responses to the client. The data is based on historical stock prices available in CSV files.
@@ -18,11 +17,18 @@ The project consists of two components:
 
 ## Setup
 
-### 1. Server
+### 1. Compilation
+Before running the server and client, compile the C files using the following commands:
 
+```sh
+gcc -o server server.c -lpthread
+gcc -o client client.c
+```
+
+### 2. Running the Server
 To start the server, run the following command in your terminal:
 
-```bash
+```sh
 ./server MSFT.csv TSLA.csv 30000
 ```
 
@@ -32,11 +38,10 @@ To start the server, run the following command in your terminal:
 
 Once the server is started, it will read the stock data from the CSV files and wait for client requests. The server will print "server started" and then listen for connections.
 
-### 2. Client
-
+### 3. Running the Client
 To start the client, run the following command:
 
-```bash
+```sh
 ./client localhost 30000
 ```
 
@@ -53,7 +58,7 @@ The client supports the following commands:
 
 Displays the available stocks:
 
-```bash
+```sh
 > List
 TSLA | MSFT
 ```
@@ -62,7 +67,7 @@ TSLA | MSFT
 
 Displays the stock price for a given stock on a specific date:
 
-```bash
+```sh
 > Prices MSFT 2021-11-08
 269.36
 > Prices TSLA 2021-11-09
@@ -73,7 +78,7 @@ Displays the stock price for a given stock on a specific date:
 
 Calculates the maximum possible profit from buying and selling stock within a given date range:
 
-```bash
+```sh
 > MaxProfit MSFT 2021-11-04 2021-11-17
 29.92
 > MaxProfit TSLA 2021-11-04 2021-11-17
@@ -84,7 +89,7 @@ Calculates the maximum possible profit from buying and selling stock within a gi
 
 Terminates the client and server interaction:
 
-```bash
+```sh
 > quit
 ```
 
@@ -100,7 +105,7 @@ Messages from the client contain a query command, and messages from the server c
 
 If the user enters an invalid command or incorrect syntax, the program will respond with:
 
-```bash
+```sh
 Invalid syntax
 ```
 
@@ -117,3 +122,4 @@ When querying for stock prices, the server returns the closing price for the spe
 - The client and server can run on the same or different machines, provided they can communicate over the specified port.
 - Ensure that the server has the required CSV files (`MSFT.csv` and `TSLA.csv`) before starting.
 - The date format for commands should be `YYYY-MM-DD`.
+
